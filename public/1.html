@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script type="text/javascript">
+    // 1.请补全JavaScript代码，要求实现对象参数的深拷贝并返回拷贝之后的新对象
+    const oldobj = {
+      id: 1,
+      name: '章三',
+      msg: {
+        age: 18,
+        msg: {
+            age: 18,
+        }
+      },
+    }
+    let newobj = {}
+    let map = new Map(Object.entries(oldobj))
+    // console.log(map);
+    const _completeDeepClone = (target, map = new Map()) => {
+      for (let [key, value] of map) {
+        // console.log(key,value);
+        if (value instanceof Array) {
+            // 判断是否为数组
+            target[key] = [];
+            _completeDeepClone(target[key], new Map(value));
+        } else if (value instanceof Object) {
+            // 判断是否为对象
+            target[key] = {};
+            _completeDeepClone(target[key], new Map(Object.entries(value)))
+        } else {
+            // 判断是否为普通值
+            target[key] = value;
+        }
+      }
+    }
+    _completeDeepClone(newobj, map)
+    console.log(newobj)
+  </script>
+</html>

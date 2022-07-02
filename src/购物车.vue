@@ -2,7 +2,7 @@
   <div id="app">
     <table class="tb">
       <tr>
-        <th><input type="checkbox" v-model='checkAll'/>全选</th>
+        <th><input type="checkbox" />全选</th>
         <th>商品</th>
         <th>单价</th>
         <th>数量</th>
@@ -10,10 +10,10 @@
         <th>操作</th>
       </tr>
       <!-- 循环渲染的元素tr -->
-      <tr v-for='item in list' :key='item.id' >
-        <td><input type="checkbox" v-model="item.c"/></td>
-        <td>{{item.name}}</td>
-        <td>{{item.price+'w'}}</td>
+      <tr>
+        <td><input type="checkbox" /></td>
+        <td>商品</td>
+        <td>单价</td>
         <td><span>-</span><input type="text" /><span>+</span></td>
         <td>小记</td>
         <td><button>删除</button></td>
@@ -24,7 +24,7 @@
       </tr>
     </table>
     <br />
-    <button @click='del'>删除选中商品</button>
+    <button>删除选中商品</button>
     <button>清理购物车</button>
     <br />
     <div style="margin-top: 20px">
@@ -40,31 +40,18 @@ export default {
   data() {
     return {
       list: [
-        { id: 1, name: "奔驰", time: "2020-08-01",price:30,c:false },
-        { id: 2, name: "宝马", time: "2020-08-02",price:40,c:false },
-        { id: 3, name: "奥迪", time: "2020-08-03",price:50,c:false },
+        { id: 1, name: "奔驰", time: "2020-08-01" },
+        { id: 2, name: "宝马", time: "2020-08-02" },
+        { id: 3, name: "奥迪", time: "2020-08-03" },
       ],
-      
     };
   },
   methods: {
-    del(){
-      const list = this.list.filter(function(item) {
-    return item.c != true
- });
- this.list =list
-    }
+    del(index) {
+      // 删除按钮 - 得到索引, 删除数组里元素
+      this.list.splice(index, 1);
+    },
   },
-  computed: {
-    checkAll:{
-      set(val){
-        this.list.forEach((ele)=>ele.c=val)
-      },
-      get(){
-        return this.list.every(ele=>ele.c===true)
-      }
-    }
-  }
 };
 </script>
 

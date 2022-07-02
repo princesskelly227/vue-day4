@@ -65,7 +65,7 @@ export default {
       this.list.splice(index, 1);
     },
     dels() {
-
+      
     },
     delall() {
       this.list=[]

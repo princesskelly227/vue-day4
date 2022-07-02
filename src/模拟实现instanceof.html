@@ -8,16 +8,22 @@
 </head>
 <body>
     <script>
-        function fn(val){
-            if(val.__proto__.__proto__){
-                return console.log('ture');
+        function myInstanceof(left, right) {
+            if (Object(left) !== left) return false;
+            let pro = left.__proto__;
+            let prototype = right.prototype;
+            while (true) {
+                if (pro === null) return false;
+                if (pro === prototype) return true;
+                pro = pro.__proto__;
             }
         }
-        fn([])
-        const arr={}
-        console.log(arr);
-        console.log(arr.__proto__.constructor);
-        console.log(arr instanceof Array);
+        let arr = [];
+        let obj={}
+        console.log(myInstanceof(arr, Object));
+        console.log(myInstanceof(arr, Array)); 
+        console.log(myInstanceof(obj, Object)); 
+        console.log(myInstanceof(obj, Array)); 
     </script>
 </body>
 </html>

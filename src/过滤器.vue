@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p>国内网站粉丝数量：{{ num | numfil(10000,'万') }}</p>
-    <p>外国网站粉丝数量：{{ num | numfil(1000,'千') }}</p>
+    <p>国内网站粉丝数量：{{ (num + '万') | numfil(10000) }}</p>
+    <p>外国网站粉丝数量：{{ (num + '千') | numfil(1000) }}</p>
     <br />
     <p>时间：{{ time | timefil('YYYY-MM-DD')}}</p>
     <p>时间：{{ time | timefil('YYYY/MM/DD')}}</p>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from moment
 export default {
     data() {
         return {
@@ -18,8 +18,8 @@ export default {
         }
     },
     filters: {
-        numfil(val,unit,str) {
-            return val / unit + str
+        numfil(val,unit) {
+            return this.num / unit
         },
         timefil(val,str) {
              return moment(val).format(str)

@@ -81,7 +81,6 @@
 // 3. 下载bootstrap, main.js引入bootstrap.css
 // 4. 把list数组 - 铺设表格
 // 5. 修改价格颜色
-
 // 1. 新增zichan
 // 2. 点击事件绑定
 // 3. 给表 单绑定变量
@@ -153,4 +152,4 @@ export default {
 .red {
   color: red;
 }
-</style>
+</style> 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--  -->
+    <script>
+        // 分析this指向
+        function fn() {
+            console.log(this); // window
+        };
+        // this的指向取决于： 调用时才能确定指向了谁，一般指向调用者
+        // js执行为从上往下 因为当前的fn()还没有调用  所以不知道this指向谁
+
+        // 最后的调用是在obj的b函数内调用的
+        // 当前的fn()是在obj内调用 但是调用者还是window 且fn()为普通的函数 相当于window.fn()  跟在哪调用没关系
+        // 所以此时的this指向为 window
+
+
+
+        // this的指向取决于： 调用时才能确定指向了谁，一般指向调用者
+        const obj = {
+            name: "test",
+            a() {
+                console.log(this.a); // this指向：obj调用了这个函数 所以此时的this指向于obj这个对象  打印this.a 相当于调用了obj.a这个函数
+                setTimeout(function () {
+                    console.log(this.a); // this指向：异步操作 等到调用的时候  定时器的函数调用一般指向 window  而window里面没有a 这个属性 所以为未定义 undefind 
+                }, 1000);
+            },
+            b() {
+                fn()
+                console.log(this); // this指向：因为是obj调用了这个函数 所以此时的this指向于obj这个对象
+            },
+
+        };
+        obj.a();
+        obj.b();
+
+    </script>
+</body>
+
+</html>

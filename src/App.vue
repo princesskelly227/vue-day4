@@ -51,8 +51,6 @@ export default {
         { id: 2, name: "宝马", price: 200000, conut: 0, c: false },
         { id: 3, name: "奥迪", price: 300000, conut: 0, c: false },
       ],
-      num: 0,
-      arr: [],
     };
   },
   methods: {

@@ -1,5 +1,7 @@
 <template>
-  <div id="app">
+  <div>
+   
+   
     {{ getTotalPrice }}
     {{ getTotalPrice }}
     {{ getTotalPrice }}
@@ -9,16 +11,16 @@
 </template>
 
 <script>
-
- import moment from 'moment'
 export default {
-  data(){
+  data() {
     return {
       total: 5, // 商品数量
       price: 98, // 单价
       coupon: 400, // 优惠券
-    }
+      // getTotalPrice: 0,
+    };
   },
+  
   computed: {
     getTotalPrice() {
       console.log("计算");
@@ -27,13 +29,5 @@ export default {
         : this.total * this.price;
     },
   },
- 
-  filters:{
-    
-  }
-}
+};
 </script>
-
-<style>
-
-</style>

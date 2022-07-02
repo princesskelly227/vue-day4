@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn(val){
+            if(val.__proto__.__proto__){
+                return console.log('ture');
+            }
+        }
+        fn([])
+        const arr={}
+        console.log(arr);
+        console.log(arr.__proto__.constructor);
+        console.log(arr instanceof Array);
+    </script>
+</body>
+</html>

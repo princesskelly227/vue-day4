@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fn() {
+            console.log(this);//window//obj调用了b，b有调用了fn，fn()调用了fn,fn是在全局调用的,在全局全局的调用者是window
+        }
+        const obj = {
+            name: "test",
+            a() {
+                console.log(this.a);//a()因为obj调用了a，所以调用者是obj 所以this.a=obj.a
+                setTimeout(function () {
+                    console.log(this.a);//undefined因为obj调用了a，a调用了定时器所以最后的调用者是a所以this.a=a.a有因为a里面没有a这个属性所以是undefined
+                }, 1000);
+            },
+            b() {
+                console.log(this);//obj因为obj调用了b所以调用者是obj所以this=obj
+                fn();
+            },
+        };
+        obj.a();
+        obj.b();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //方法一： 别人的，主要就是用了 Object.getPrototypeOf这个方法
+        function myInstanceof(left, right) {
+            let proto = Object.getPrototypeOf(left); // 获取对象的原型
+            prototype = right.prototype; // 获取构造函数的 prototype 对象
+            // 判断构造函数的 prototype 对象是否在对象的原型链上
+            while (true) {
+                if (!proto) return false; //找到也没有找到 尽头Object.prototype.__proto__ = null
+                if (proto === prototype) return true; //找到了
+
+                proto = Object.getPrototypeOf(proto); // 接着往上找
+            }
+        }
+
+
+        // 方法二： 自己想的方法, 自下而上  好理解
+        function _instanceof(left, right) {
+            let _proto = left.__proto__;
+            prototype = right.prototype;
+            while (true) {
+                // 直接就找到头了么？没有，进行下一步
+                if (_proto === null) {
+                    return false
+                }
+                // 是不是相等，相等就是找到了
+                if (_proto === prototype) {
+                    return true
+                }
+                // 前两个都不满足那就接着向上找
+                _proto = _proto.__proto__
+            }
+        }
+
+        var arr = [];
+        let res = myInstanceof([], Array);
+        console.log(res);
+        console.log(_instanceof([], Array));
+        console.log(_instanceof(Object, Object)); // true
+        console.log([] instanceof Object) // true
+
+
+
+
+
+
+    //     // 验证一些东西
+
+    //     function Person() { }
+    //     var zhang = new Person();
+
+    //     // 以下会报错
+    //     //   console.log(zhang instanceof Person.prototype)
+    //     //   console.log(zhang instanceof Person.prototype.__proto__)
+    //     // 正确的
+    //     console.log(zhang instanceof Object);  // 所以right.prototype
+
+    //     console.log(Object.getPrototypeOf(zhang) == zhang.__proto__); //true //mmp这个方法只能挖一层 Object.getPrototypeOf(zhang) == zhang.__proto__.__proto__ 就是错的
+
+    // //   console.log(zhang.__proto__ == Object.prototype)  false
+    </script>
+</body>
+
+</html>

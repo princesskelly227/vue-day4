@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //         // instanceof原理：
+        // 作用：
+
+        // 用于判断某个实例是否属于某构造函数 ，在继承关系中用来判断一个实例是否属于它的父类型或者祖先类型的实例
+
+        // 查找构造函数的原型对象是否在实例对象的原型链上，如果在返回true，如果不在返回false。
+
+        // 说白了，只要右边变量的 prototype 在左边变量的原型链上即可。因此，instanceof 在查找的过程中会遍历左边变量的原型链，直到找到右边变量的 prototype，如果查找失败，则会返回 false
+        function myInstanceof(left, right) {
+            // 对于左侧参数如果是非对象直接返回false
+            if (Object(left) !== left) return false;
+            // 定义实例和构造函数 寻找原型
+            let pro = left.__proto__;
+            let prototype = right.prototype;
+            // 循环去找原型是否相等
+            while (true) {
+                //  判断是不是找到顶了
+                if (pro === null) return false;
+                // 如果该实例和构造函数上的原型想等
+                if (pro === prototype) return true;
+                // 两个不满足就接着往上找
+                pro = pro.__proto__;
+            }
+        }
+
+        // 实验一下
+        let arr = [];
+        let res = myInstanceof(arr, Array);
+        console.log(res);  // true
+        let str = '111'
+        console.log(myInstanceof(arr, Array)); // true
+        console.log(myInstanceof(str, Object)); // false
+        console.log(myInstanceof(Object, Object)); // true
+        console.log(Object instanceof Object) // true
+
+    </script>
+</body>
+
+</html>

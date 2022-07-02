@@ -10,7 +10,7 @@
         <th>操作</th>
       </tr>
       <!-- 循环渲染的元素tr -->
-      <tr v-for="(item,index) in list" :key="item.id">
+      <tr v-for="(item, index) in list" :key="item.id">
         <td><input type="checkbox" v-model="item.c" /></td>
         <td>{{ item.name }}</td>
         <td>{{ item.price }}</td>
@@ -65,10 +65,11 @@ export default {
       this.list.splice(index, 1);
     },
     dels() {
-
+      const list = this.list.filter(ele=>ele.c!=true)
+      this.list=list
     },
     delall() {
-      this.list=[]
+      this.list = [];
     },
   },
   computed: {
@@ -81,13 +82,10 @@ export default {
       },
     },
     isprice() {
-      return this.list.reduce((sum, next) => sum+next.conut, 0);
+      return this.list.reduce((sum, next) => sum + next.conut, 0);
     },
     allprice() {
-      return this.list.reduce(
-        (sum, next) =>  sum + next.price * next.conut ,
-        0
-      );
+      return this.list.reduce((sum, next) => sum + next.price * next.conut, 0);
     },
   },
 };
